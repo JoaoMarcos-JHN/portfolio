@@ -2,6 +2,8 @@
 
 Meu portfólio pessoal: projetos, stack, trajetória e contato. Desenvolvedor web júnior, com front-end em HTML, CSS e JavaScript e back-end em Node.js e Supabase.
 
+**Site:** https://joaomarcos-jhn.github.io/portfolio/
+
 ![Prévia do portfólio](assets/img/og.png)
 
 ## Sobre o site
