@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>João Marcos Ribeiro · Desenvolvedor web júnior</title>
+    <meta name="description"
+        content="Portfólio de João Marcos Ribeiro, desenvolvedor web júnior em Campinas/SP. Front-end com HTML, CSS e JavaScript; back-end com Node.js e Supabase.">
+    <meta name="author" content="João Marcos Ribeiro">
+    <meta name="theme-color" content="#EEF1EE">
+
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:title" content="João Marcos Ribeiro · Desenvolvedor web júnior">
+    <meta property="og:description"
+        content="Front-end com HTML, CSS e JavaScript; back-end com Node.js e Supabase. Projetos, stack e currículo.">
+    <meta property="og:image" content="assets/img/og.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" href="assets/img/favicon-32x32.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,600;0,700;1,400&family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        // Aplica o tema salvo antes da página aparecer, para não piscar no tema errado
+        try {
+            const tema = localStorage.getItem('tema');
+            if (tema === 'light' || tema === 'dark') document.documentElement.dataset.theme = tema;
+        } catch { }
+    </script>
+    <script src="js/main.js" defer></script>
+</head>
+
+<body>
+    <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="topo">
+        <div class="topo__interno">
+            <a class="topo__marca" href="#inicio">João Marcos Ribeiro</a>
+            <nav aria-label="Seções">
+                <ul class="topo__nav">
+                    <li><a href="#projetos">Projetos</a></li>
+                    <li><a href="#stack">Stack</a></li>
+                    <li><a href="#trajetoria">Trajetória</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+            <a class="topo__cv" href="assets/curriculo-joao-marcos-ribeiro.pdf" download>Currículo<span
+                    class="topo__cv-formato"> (PDF)</span></a>
+            <button class="tema" type="button" aria-label="Ativar modo escuro">
+                <svg class="tema__lua" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20">
+                    <path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linejoin="round" />
+                </svg>
+                <svg class="tema__sol" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20">
+                    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2" />
+                    <path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main id="conteudo" class="trilho">
+
+        <!-- Apresentação -->
+        <section id="inicio" class="intro" aria-labelledby="nome">
+            <span class="no no--inicio" aria-hidden="true"></span>
+            <div class="intro__cabeca">
+                <img class="intro__foto" src="assets/img/foto-joao.webp" width="480" height="480"
+                    alt="Foto de João Marcos Ribeiro">
+                <h1 id="nome" class="intro__nome">João Marcos Ribeiro</h1>
+            </div>
+            <p class="intro__cargo">
+                Desenvolvedor web júnior. Front-end com HTML, CSS e JavaScript; back-end com Node.js e Supabase.
+            </p>
+            <p class="intro__contexto">
+                Hoje no suporte de TI na Rework, cursando Análise e Desenvolvimento de Sistemas no SENAC, em
+                Campinas/SP. Disponível para vagas remotas, híbridas ou presenciais.
+            </p>
+            <div class="intro__acoes">
+                <a class="botao" href="assets/curriculo-joao-marcos-ribeiro.pdf" download>
+                    <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20">
+                        <path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    Baixar currículo
+                </a>
+                <ul class="links-sociais">
+                    <li><a href="https://github.com/JoaoMarcos-JHN" target="_blank" rel="noopener">GitHub</a></li>
+                    <li><a href="https://www.linkedin.com/in/jo%C3%A3o-marcos-ribeiro-088580347/" target="_blank"
+                            rel="noopener">LinkedIn</a></li>
+                    <li><a href="mailto:joaomarcosr.contato@gmail.com">E-mail</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Projetos, no formato de changelog -->
+        <section id="projetos" class="secao" aria-labelledby="titulo-projetos">
+            <h2 id="titulo-projetos" class="secao__titulo">Projetos</h2>
+            <p class="secao__intro">
+                Organizados como um changelog: o que está em desenvolvimento vem primeiro, depois cada entrega, da
+                mais nova para a primeira.
+            </p>
+
+            <!-- Em desenvolvimento -->
+            <article class="versao versao--destaque" aria-labelledby="p-encontrei">
+                <span class="no no--aberto" aria-hidden="true"></span>
+                <p class="versao__tag">Em desenvolvimento</p>
+                <h3 id="p-encontrei" class="versao__nome">Encontrei para Você</h3>
+                <p class="versao__resumo">
+                    Site de ofertas com links de afiliado e um painel administrativo próprio. Fiz sozinho, do
+                    front-end ao banco de dados.
+                </p>
+
+                <figure class="moldura moldura--grande">
+                    <button class="moldura__abrir" type="button" data-galeria="encontrei" data-indice="0"
+                        aria-label="Ampliar: página inicial do site">
+                        <img src="assets/img/encontrei-home.webp" width="1600" height="759"
+                            alt="Página inicial do Encontrei para Você com busca, categorias populares e destaque de produtos">
+                    </button>
+                    <figcaption>Página inicial: busca com atalhos para as categorias mais procuradas.</figcaption>
+                </figure>
+
+                <div class="case">
+                    <div class="case__texto">
+                        <h4>O que eu construí</h4>
+                        <dl class="case__lista">
+                            <dt>Site público</dt>
+                            <dd>Busca, filtros por categoria, loja, faixa de preço e desconto mínimo, ordenação,
+                                favoritos com cálculo de economia, histórico de vistos recentemente e página de
+                                produto com galeria e compartilhamento. No celular, navegação pela barra inferior.</dd>
+                            <dt>Painel admin</dt>
+                            <dd>Login, dashboard com gráficos de cadastros e cliques, cadastro de oferta em 4 etapas
+                                com prévia do card e gestão de ofertas, categorias e lojas, com reordenação por arrastar
+                                e ativação de cada item.</dd>
+                            <dt>Back-end</dt>
+                            <dd>API em Node.js com Express entre o site e o banco. Postgres no Supabase com Row Level
+                                Security e autenticação do admin. Cada clique em “Ver oferta” é gravado no banco e
+                                alimenta o dashboard.</dd>
+                        </dl>
+
+                        <h4>O mais difícil</h4>
+                        <p>
+                            O back-end. Modelar ofertas, lojas, categorias e cliques no Postgres, fazer essas tabelas
+                            se relacionarem e manter a API em Express consistente com o que o front espera. Foi onde
+                            eu mais aprendi no projeto.
+                        </p>
+                    </div>
+
+                    <aside class="case__ficha" aria-label="Ficha técnica">
+                        <h4>Stack</h4>
+                        <ul class="etiquetas">
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>JavaScript</li>
+                            <li>Node.js</li>
+                            <li>Express</li>
+                            <li>Supabase</li>
+                            <li>PostgreSQL</li>
+                        </ul>
+                        <h4>Status</h4>
+                        <p>Ainda sem deploy. O repositório é privado enquanto o projeto está em desenvolvimento; mostro
+                            o código numa entrevista.</p>
+                    </aside>
+                </div>
+
+                <!-- Miniaturas montadas pelo js/main.js a partir da lista "galerias" -->
+                <div class="galeria" data-miniaturas="encontrei">
+                    <ul class="galeria__grade" data-tipo="desktop" aria-label="Telas no computador"></ul>
+                    <ul class="galeria__grade galeria__grade--celular" data-tipo="celular"
+                        aria-label="Telas no celular"></ul>
+                    <button class="galeria__mais" type="button" aria-expanded="false" hidden></button>
+                </div>
+            </article>
+
+            <!-- Entregas -->
+            <article class="versao" aria-labelledby="p-clarix">
+                <span class="no" aria-hidden="true"></span>
+                <p class="versao__tag">v0.3</p>
+                <div class="entrega">
+                    <a class="moldura entrega__imagem" href="https://tiny-melba-869bc0.netlify.app/" target="_blank"
+                        rel="noopener" tabindex="-1" aria-hidden="true">
+                        <img src="assets/img/clarix-dados.webp" width="1440" height="900" alt="" loading="lazy">
+                    </a>
+                    <div class="entrega__texto">
+                        <h3 id="p-clarix" class="versao__nome">Clarix Dados</h3>
+                        <p>Landing page de um serviço de análise de dados para pequenas empresas. Apresenta os
+                            serviços, o processo em etapas e leva o visitante a pedir um diagnóstico.</p>
+                        <ul class="etiquetas">
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>JavaScript</li>
+                        </ul>
+                        <a class="link-forte" href="https://tiny-melba-869bc0.netlify.app/" target="_blank"
+                            rel="noopener">Ver site publicado</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="versao" aria-labelledby="p-burguer">
+                <span class="no" aria-hidden="true"></span>
+                <p class="versao__tag">v0.2</p>
+                <div class="entrega">
+                    <a class="moldura entrega__imagem" href="https://projeto-hamburgueria-five.vercel.app/"
+                        target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+                        <img src="assets/img/jm-burguer.webp" width="1600" height="771" alt="" loading="lazy">
+                    </a>
+                    <div class="entrega__texto">
+                        <h3 id="p-burguer" class="versao__nome">JM Burguer</h3>
+                        <p>Cardápio online de hamburgueria com carrinho. O pedido fica salvo no navegador, o endereço
+                            é validado antes de fechar e o cliente escolhe a forma de pagamento.</p>
+                        <ul class="etiquetas">
+                            <li>HTML</li>
+                            <li>Tailwind CSS</li>
+                            <li>JavaScript</li>
+                        </ul>
+                        <a class="link-forte" href="https://projeto-hamburgueria-five.vercel.app/" target="_blank"
+                            rel="noopener">Ver site publicado</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="versao" aria-labelledby="p-barber">
+                <span class="no" aria-hidden="true"></span>
+                <p class="versao__tag">v0.1</p>
+                <div class="entrega">
+                    <a class="moldura entrega__imagem" href="https://landing-page-responsive-five.vercel.app/"
+                        target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+                        <img src="assets/img/john-barber.webp" width="1600" height="775" alt="" loading="lazy">
+                    </a>
+                    <div class="entrega__texto">
+                        <h3 id="p-barber" class="versao__nome">John Barber</h3>
+                        <p>Landing page de barbearia. O agendamento abre o WhatsApp com uma mensagem que muda conforme
+                            a seção que o cliente está vendo, e o horário de funcionamento indica se a loja está
+                            aberta agora.</p>
+                        <ul class="etiquetas">
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>JavaScript</li>
+                        </ul>
+                        <a class="link-forte" href="https://landing-page-responsive-five.vercel.app/" target="_blank"
+                            rel="noopener">Ver site publicado</a>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <!-- Stack -->
+        <section id="stack" class="secao" aria-labelledby="titulo-stack">
+            <span class="no" aria-hidden="true"></span>
+            <h2 id="titulo-stack" class="secao__titulo">Stack</h2>
+            <p class="secao__intro">Agrupada pelo quanto eu uso no dia a dia.</p>
+            <dl class="stack">
+                <div class="stack__grupo">
+                    <dt>Uso com segurança</dt>
+                    <dd>
+                        <ul class="etiquetas etiquetas--fortes">
+                            <li>HTML</li>
+                            <li>CSS</li>
+                            <li>Git e GitHub</li>
+                        </ul>
+                    </dd>
+                </div>
+                <div class="stack__grupo">
+                    <dt>Uso em projetos e estou aprofundando</dt>
+                    <dd>
+                        <ul class="etiquetas">
+                            <li>JavaScript</li>
+                            <li>Python</li>
+                            <li>Node.js</li>
+                            <li>Express</li>
+                            <li>Supabase</li>
+                            <li>Tailwind CSS</li>
+                        </ul>
+                    </dd>
+                </div>
+                <div class="stack__grupo">
+                    <dt>Estudando</dt>
+                    <dd>
+                        <ul class="etiquetas etiquetas--leves">
+                            <li>Java</li>
+                        </ul>
+                    </dd>
+                </div>
+            </dl>
+        </section>
+
+        <!-- Trajetória -->
+        <section id="trajetoria" class="secao" aria-labelledby="titulo-trajetoria">
+            <span class="no" aria-hidden="true"></span>
+            <h2 id="titulo-trajetoria" class="secao__titulo">Trajetória</h2>
+            <ol class="linha-tempo">
+                <li>
+                    <p class="linha-tempo__quando"><time datetime="2025-10">out 2025</time> até hoje</p>
+                    <h3>Suporte de Helpdesk</h3>
+                    <p class="linha-tempo__onde">Rework · Campinas/SP</p>
+                    <p>Atendo usuários e resolvo problemas de hardware, software, redes e sistemas corporativos,
+                        acompanhando cada chamado até a solução.</p>
+                </li>
+                <li>
+                    <p class="linha-tempo__quando"><time datetime="2025-08">ago 2025</time> até hoje</p>
+                    <h3>Análise e Desenvolvimento de Sistemas</h3>
+                    <p class="linha-tempo__onde">SENAC</p>
+                    <p>Tecnólogo, cursando o 3º semestre.</p>
+                </li>
+                <li>
+                    <p class="linha-tempo__quando"><time datetime="2018-10">out 2018</time> a <time
+                            datetime="2025-05">mai 2025</time></p>
+                    <h3>Varejo</h3>
+                    <p class="linha-tempo__onde">Rede Somar de Supermercados · Capela do Alto/SP</p>
+                    <p>Seis anos no varejo, o último como encarregado de loja: liderança de equipe, organização da
+                        operação e atendimento ao cliente.</p>
+                </li>
+                <li>
+                    <p class="linha-tempo__quando"><time datetime="2019-01">2019</time> a <time
+                            datetime="2020-12">2020</time></p>
+                    <h3>Técnico em Informática</h3>
+                    <p class="linha-tempo__onde">Cruzeiro do Sul</p>
+                </li>
+            </ol>
+        </section>
+
+        <!-- Contato -->
+        <section id="contato" class="secao contato" aria-labelledby="titulo-contato">
+            <span class="no no--aberto" aria-hidden="true"></span>
+            <p class="versao__tag">Próxima versão</p>
+            <h2 id="titulo-contato" class="contato__titulo">Depende da sua equipe.</h2>
+            <p class="secao__intro">
+                Procuro minha primeira vaga como desenvolvedor. Se o meu perfil faz sentido para o seu time, fale
+                comigo pelo canal que preferir.
+            </p>
+            <ul class="contato__lista">
+                <li>
+                    <span class="contato__rotulo">E-mail</span>
+                    <a href="mailto:joaomarcosr.contato@gmail.com">joaomarcosr.contato@gmail.com</a>
+                    <button class="copiar" type="button" data-copiar="joaomarcosr.contato@gmail.com">Copiar</button>
+                </li>
+                <li>
+                    <span class="contato__rotulo">LinkedIn</span>
+                    <a href="https://www.linkedin.com/in/jo%C3%A3o-marcos-ribeiro-088580347/" target="_blank"
+                        rel="noopener">in/joão-marcos-ribeiro</a>
+                </li>
+                <li>
+                    <span class="contato__rotulo">WhatsApp</span>
+                    <a href="https://wa.me/5515998444042" target="_blank" rel="noopener">(15) 99844-4042</a>
+                </li>
+                <li>
+                    <span class="contato__rotulo">GitHub</span>
+                    <a href="https://github.com/JoaoMarcos-JHN" target="_blank" rel="noopener">JoaoMarcos-JHN</a>
+                </li>
+            </ul>
+            <a class="botao" href="assets/curriculo-joao-marcos-ribeiro.pdf" download>
+                <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20">
+                    <path d="M12 3v12m0 0-5-5m5 5 5-5M4 19h16" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                Baixar currículo
+            </a>
+        </section>
+    </main>
+
+    <footer class="rodape">
+        <p>© <span data-ano>2026</span> João Marcos Ribeiro. Feito com HTML, CSS e JavaScript, sem framework.</p>
+    </footer>
+
+    <!-- Visualizador de imagens da galeria -->
+    <dialog class="visor" aria-label="Telas do projeto">
+        <figure class="visor__figura">
+            <img class="visor__imagem" src="" alt="">
+            <figcaption class="visor__legenda"></figcaption>
+        </figure>
+        <div class="visor__controles">
+            <button type="button" class="visor__botao" data-visor="anterior">Anterior</button>
+            <span class="visor__contador" aria-live="polite"></span>
+            <button type="button" class="visor__botao" data-visor="proxima">Próxima</button>
+            <button type="button" class="visor__botao visor__fechar" data-visor="fechar" autofocus>Fechar</button>
+        </div>
+    </dialog>
+</body>
+
+</html>
