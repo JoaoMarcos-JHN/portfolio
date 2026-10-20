@@ -695,6 +695,14 @@ section[id] {
     margin-top: 1.25rem;
 }
 
+/* Site publicado e código lado a lado */
+.entrega__texto .entrega__links {
+    margin-top: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 24px;
+}
+
 @media (min-width: 860px) {
     .entrega {
         grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
