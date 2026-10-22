@@ -189,7 +189,7 @@ section[id] {
     font-family: var(--fonte-titulo);
     font-weight: 700;
     font-stretch: 85%;
-    font-size: clamp(1.125rem, 0.85rem + 0.9vw, 1.625rem);
+    font-size: clamp(1.375rem, 1.1rem + 0.9vw, 1.625rem);
     color: var(--tinta);
     text-decoration: none;
     margin-right: auto;
@@ -292,7 +292,7 @@ section[id] {
     display: block;
     padding: 14px 0;
     font-family: var(--fonte-titulo);
-    font-size: 1.375rem;
+    font-size: 1.1875rem; /* menor que o nome no topo, para manter a hierarquia */
     font-weight: 600;
     font-stretch: 90%;
     color: var(--tinta);
@@ -315,6 +315,16 @@ section[id] {
 
     .menu-celular {
         display: block;
+    }
+
+    /* Nome numa linha só e sempre maior que os itens do menu, mesmo em telas de 320px */
+    .topo__marca {
+        font-size: min(1.375rem, 5.6vw);
+        white-space: nowrap;
+    }
+
+    .menu-celular a {
+        font-size: min(1.1875rem, 4.8vw);
     }
 }
 

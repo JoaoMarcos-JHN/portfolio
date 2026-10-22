@@ -27,6 +27,10 @@ assets/
   img/               fotos, prints dos projetos e imagem de preview (og.png)
 ```
 
+## Atualizar o site
+
+O GitHub Pages publica sozinho a cada `git push`, e os navegadores guardam CSS, JS e imagens em cache. Ao alterar o `css/style.css`, o `js/main.js` ou a foto, aumente o número em `?v=` nos links do `index.html` (por exemplo, de `?v=2` para `?v=3`). Assim o navegador baixa a versão nova, e não junta HTML novo com CSS antigo.
+
 ## Rodar localmente
 
 Não precisa instalar nada. Basta abrir o `index.html` no navegador ou subir um servidor estático:
