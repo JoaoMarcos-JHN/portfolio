@@ -11,6 +11,7 @@
     --cobalto: #2747E8;
     --cobalto-forte: #1A33B5;
     --sobre-cobalto: #FFFFFF;
+    --sucesso: #1A7F45;
 
     --fonte-titulo: 'Bricolage Grotesque', 'Arial Narrow', sans-serif;
     --fonte-texto: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
@@ -35,11 +36,13 @@
         --cobalto: #8A9DFF;
         --cobalto-forte: #B1BEFF;
         --sobre-cobalto: #0D1430;
+        --sucesso: #5CCB8A;
         color-scheme: dark;
     }
 }
 
 :root[data-theme="dark"] {
+    --sucesso: #5CCB8A;
     --papel: #0C1210;
     --papel-2: #131B18;
     --tinta: #E3E9E5;
@@ -63,6 +66,8 @@
 
 * {
     margin: 0;
+    /* Remove o realce azul do toque no celular; o contorno do teclado (:focus-visible) continua */
+    -webkit-tap-highlight-color: transparent;
 }
 
 html {
@@ -241,19 +246,75 @@ section[id] {
     display: block;
 }
 
-@media (max-width: 760px) {
-    .topo__nav {
-        display: none;
-    }
+/* Menu do celular: botão ☰/✕ e painel que desce do topo */
+.menu-botao,
+.menu-celular {
+    display: none;
 }
 
-@media (max-width: 420px) {
-    .topo__interno {
-        gap: 20px;
+.menu-botao {
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    margin-left: -24px;
+    padding: 0;
+    border: 1px solid var(--linha);
+    border-radius: 10px;
+    background: none;
+    color: var(--tinta);
+    cursor: pointer;
+}
+
+.menu-botao__fechar,
+.menu-botao[aria-expanded="true"] .menu-botao__abrir {
+    display: none;
+}
+
+.menu-botao[aria-expanded="true"] .menu-botao__fechar {
+    display: block;
+}
+
+.menu-celular {
+    position: absolute;
+    top: calc(100% + 1px); /* abaixo da linha do topo, sem cobri-la */
+    left: 0;
+    right: 0;
+    background: var(--papel);
+    border-bottom: 1px solid var(--linha);
+    padding: 4px var(--gutter) 12px;
+}
+
+.menu-celular li + li {
+    border-top: 1px solid var(--linha);
+}
+
+.menu-celular a {
+    display: block;
+    padding: 14px 0;
+    font-family: var(--fonte-titulo);
+    font-size: 1.375rem;
+    font-weight: 600;
+    font-stretch: 90%;
+    color: var(--tinta);
+    text-decoration: none;
+}
+
+.menu-celular .menu-celular__cv {
+    color: var(--cobalto);
+}
+
+@media (max-width: 760px) {
+    .topo__nav,
+    .topo__cv {
+        display: none;
     }
 
-    .topo__cv-formato {
-        display: none;
+    .menu-botao {
+        display: grid;
+    }
+
+    .menu-celular {
+        display: block;
     }
 }
 
@@ -391,6 +452,13 @@ section[id] {
     flex-wrap: wrap;
     gap: 8px 24px;
     font-weight: 700;
+}
+
+/* Área de toque de ~44px sem mudar o layout: o padding cresce, a margem negativa compensa */
+.links-sociais a {
+    display: inline-block;
+    padding: 10px 0;
+    margin: -10px 0;
 }
 
 /* ==========================================================================
@@ -567,10 +635,37 @@ section[id] {
     color: var(--tinta-2);
 }
 
+/* Até 900px: a ficha sobe e os detalhes ficam recolhidos atrás do botão */
+@media (max-width: 899px) {
+    .case {
+        gap: 1.5rem;
+    }
+
+    .case__ficha {
+        order: 1;
+    }
+
+    .case__mais {
+        order: 2;
+    }
+
+    .case__texto {
+        order: 3;
+    }
+
+    .case__mais[aria-expanded="false"] ~ .case__texto {
+        display: none;
+    }
+}
+
 @media (min-width: 900px) {
     .case {
         grid-template-columns: minmax(0, 1fr) 280px;
         gap: 56px;
+    }
+
+    .case__mais {
+        display: none;
     }
 
     .case__ficha {
@@ -614,19 +709,20 @@ section[id] {
     border-color: var(--cobalto);
 }
 
-/* Mesmo estilo contornado dos outros botões secundários (Copiar, Fechar, tema) */
-.galeria__mais {
+/* Botão secundário contornado: "Ver mais telas" e "Ver como foi feito" */
+.botao-contorno {
     justify-self: start;
-    padding: 10px 18px;
+    padding: 6px 14px;
     border: 1px solid var(--linha);
-    border-radius: 10px;
+    border-radius: 8px;
     background: none;
-    font-weight: 700;
+    font-size: 0.9375rem;
+    font-weight: 600;
     cursor: pointer;
     transition: border-color 0.15s ease;
 }
 
-.galeria__mais:hover {
+.botao-contorno:hover {
     border-color: var(--tinta);
 }
 
@@ -701,6 +797,30 @@ section[id] {
     display: flex;
     flex-wrap: wrap;
     gap: 0 24px;
+}
+
+/* Até 860px: versão e nome ficam acima da imagem, como no projeto em destaque.
+   display: contents solta os filhos do bloco de texto para poder reordenar o título. */
+@media (max-width: 859px) {
+    .entrega {
+        margin-top: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .entrega__texto {
+        display: contents;
+    }
+
+    .entrega__texto .versao__nome {
+        order: -1;
+        margin: 0.25rem 0 1rem;
+    }
+
+    .entrega__texto > p:first-of-type {
+        margin-top: 1rem;
+    }
 }
 
 @media (min-width: 860px) {
@@ -865,22 +985,76 @@ section[id] {
 }
 
 .copiar {
-    margin-left: auto;
-    padding: 4px 12px;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    align-self: center;
+    margin-left: -12px; /* fica a 12px do e-mail (o gap da linha é 24px) */
+    padding: 0;
     border: 1px solid var(--linha);
-    border-radius: 6px;
+    border-radius: 8px;
     background: none;
-    font-size: 0.9375rem;
+    color: var(--tinta-2);
     cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease;
 }
 
 .copiar:hover {
     border-color: var(--tinta);
+    color: var(--tinta);
+}
+
+.copiar__certo,
+.copiar[data-copiado] .copiar__icone {
+    display: none;
+}
+
+.copiar[data-copiado] .copiar__certo {
+    display: block;
+}
+
+.copiar[data-copiado] {
+    border-color: var(--sucesso);
+    color: var(--sucesso);
+}
+
+/* Texto só para leitores de tela */
+.visualmente-oculto {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
 }
 
 @media (max-width: 520px) {
     .contato__rotulo {
         flex-basis: 100%;
+    }
+
+    /* Fonte um pouco menor para o e-mail caber ao lado do botão de copiar */
+    .contato__lista a {
+        font-size: 0.9375rem;
+    }
+
+    /* Linha do e-mail em grid: rótulo em cima; e-mail e botão lado a lado embaixo.
+       A coluna do e-mail encolhe (e quebra o texto) em telas muito estreitas, sem derrubar o botão. */
+    .contato__lista .contato__item--copiar {
+        display: grid;
+        grid-template-columns: minmax(0, max-content) 36px;
+        justify-content: start;
+        align-items: center;
+        gap: 4px 10px;
+    }
+
+    .contato__item--copiar .contato__rotulo {
+        grid-column: 1 / -1;
+    }
+
+    .contato__item--copiar .copiar {
+        margin-left: 0;
     }
 }
 
@@ -970,6 +1144,44 @@ section[id] {
 
 .visor__fechar {
     margin-left: auto;
+}
+
+/* Desktop: botões com texto e contador "2 de 14" */
+.visor__botao svg,
+.visor__barra {
+    display: none;
+}
+
+/* Celular: só os ícones, botões quadrados e contador "2/14" */
+@media (max-width: 760px) {
+    .visor {
+        padding: 12px;
+    }
+
+    .visor__botao {
+        display: grid;
+        place-items: center;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+    }
+
+    .visor__botao svg {
+        display: block;
+    }
+
+    .visor__barra {
+        display: inline;
+    }
+
+    .visor__texto,
+    .visor__de {
+        display: none;
+    }
+
+    .visor__contador {
+        padding: 0 4px;
+    }
 }
 
 /* ==========================================================================

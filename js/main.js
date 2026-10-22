@@ -104,7 +104,8 @@ function mostrar(indice) {
     visorImagem.src = `assets/img/${tela.nome}.webp`;
     visorImagem.alt = tela.alt;
     visorLegenda.textContent = tela.legenda;
-    visorContador.textContent = `${indiceAtual + 1} de ${galeriaAtual.length}`;
+    // "2 de 14" no desktop e "2/14" no celular: o CSS mostra um separador ou o outro
+    visorContador.innerHTML = `${indiceAtual + 1}<span class="visor__de"> de </span><span class="visor__barra">/</span>${galeriaAtual.length}`;
 }
 
 // Monta as miniaturas (todas menos a primeira, que é a imagem principal)
@@ -168,17 +169,76 @@ visor.addEventListener('keydown', (evento) => {
     if (evento.key === 'ArrowRight') mostrar(indiceAtual + 1);
 });
 
-// Copiar e-mail
+// Deslizar o dedo na foto: para a esquerda avança, para a direita volta
+let toqueInicioX = null;
+
+visorImagem.addEventListener('touchstart', (evento) => {
+    toqueInicioX = evento.touches[0].clientX;
+}, { passive: true });
+
+visorImagem.addEventListener('touchend', (evento) => {
+    if (toqueInicioX === null) return;
+    const distancia = evento.changedTouches[0].clientX - toqueInicioX;
+    toqueInicioX = null;
+    if (Math.abs(distancia) < 40) return; // toque curto não conta como deslize
+    mostrar(indiceAtual + (distancia < 0 ? 1 : -1));
+});
+
+// Detalhes do case no celular: "Ver como foi feito" abre e fecha o texto
+document.querySelectorAll('.case__mais').forEach((botao) => {
+    botao.addEventListener('click', () => {
+        const aberto = botao.getAttribute('aria-expanded') === 'true';
+        botao.setAttribute('aria-expanded', !aberto);
+        botao.textContent = aberto ? 'Ver como foi feito' : 'Ocultar detalhes';
+    });
+});
+
+// Menu do celular
+const menuBotao = document.querySelector('.menu-botao');
+const menuCelular = document.getElementById('menu-celular');
+
+function alternarMenu(aberto) {
+    menuCelular.hidden = !aberto;
+    menuBotao.setAttribute('aria-expanded', aberto);
+    menuBotao.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
+}
+
+menuBotao.addEventListener('click', () => alternarMenu(menuCelular.hidden));
+
+// Fecha ao escolher um link, ao apertar Esc ou ao tocar fora do topo
+menuCelular.addEventListener('click', (evento) => {
+    if (evento.target.closest('a')) alternarMenu(false);
+});
+
+document.addEventListener('keydown', (evento) => {
+    if (evento.key === 'Escape' && !menuCelular.hidden) {
+        alternarMenu(false);
+        menuBotao.focus();
+    }
+});
+
+document.addEventListener('click', (evento) => {
+    if (!menuCelular.hidden && !evento.target.closest('.topo')) alternarMenu(false);
+});
+
+// Copiar e-mail: o ícone vira um "certo" verde por 2 segundos e o leitor de tela anuncia o resultado
+const avisoCopia = document.querySelector('[data-copiar-aviso]');
+
 document.querySelectorAll('[data-copiar]').forEach((botao) => {
-    const rotulo = botao.textContent;
+    let temporizador;
     botao.addEventListener('click', async () => {
+        clearTimeout(temporizador);
         try {
             await navigator.clipboard.writeText(botao.dataset.copiar);
-            botao.textContent = 'Copiado';
+            botao.dataset.copiado = '';
+            avisoCopia.textContent = 'E-mail copiado para a área de transferência';
         } catch {
-            botao.textContent = 'Não foi possível copiar';
+            avisoCopia.textContent = 'Não foi possível copiar. Selecione o e-mail e copie manualmente.';
         }
-        setTimeout(() => (botao.textContent = rotulo), 2000);
+        temporizador = setTimeout(() => {
+            delete botao.dataset.copiado;
+            avisoCopia.textContent = '';
+        }, 2000);
     });
 });
 
